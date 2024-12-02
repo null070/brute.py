@@ -1,6 +1,6 @@
 from random import *
 import os
-b = ('senha:')
+b = input('senha:')
 pwd = ['a', 'b', 'c', 'd', 'd', 'e', 'f', 'g', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 pw=""
