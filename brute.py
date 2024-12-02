@@ -14,7 +14,7 @@ while(pw!=b):
         pw=str(guess_pwd)+str(pw)
         print("tentando "pw)
         print('descobrindo...')
-        
+        print("obrigado por usar minha ferramenta!")
         os.system("clear")
         
 print("sua senha é: ", pw)
