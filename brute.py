@@ -12,7 +12,7 @@ while(pw!=b):
     for letter in range(len(b)):
         guess_pwd = pwd[randint(0,17)]
         pw=str(guess_pwd)+str(pw)
-        print("tentando "pw)
+        print("tentando ", pw)
         print('descobrindo...')
         print("obrigado por usar minha ferramenta!")
         os.system("clear")
