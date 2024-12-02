@@ -3,7 +3,7 @@
 <h2>uma ferramenta de bruteforce em .py(python)</h2>
 <h4>
     versao: <br>
-    beta:001
+    beta:09
 </h4>
 
 instalacao em uma linha: <br> <p> </p>
