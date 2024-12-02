@@ -2,7 +2,7 @@ import threading
 from random import choice
 import os
 
-
+print('ferramenta em desenvolvimento')
 b = input('Digite sua senha: ')
 
 
