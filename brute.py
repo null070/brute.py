@@ -48,6 +48,3 @@ for i in range(num_threads):
 for t in threads:
     t.join()
 
-except KeyboardInterrupt:
-    print("\n[!] Programa interrompido pelo usuário. Encerrando...")
-    sys.exit(0)
