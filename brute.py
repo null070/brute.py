@@ -30,7 +30,7 @@ def brute_force(thread_id):
 
 
 try:
-    num_threads = int(input("Quantas threads você deseja usar? "))
+    num_threads = int(input("Quantas threads você deseja usar?(nao recomendavel menores que 10 e maiores que 50)"))
     if num_threads <= 0:
         raise ValueError("O número de threads deve ser maior que zero.")
 except ValueError as e:
@@ -47,3 +47,7 @@ for i in range(num_threads):
 
 for t in threads:
     t.join()
+
+except KeyboardInterrupt:
+    print("\n[!] Programa interrompido pelo usuário. Encerrando...")
+    sys.exit(0)
