@@ -6,6 +6,6 @@
     beta:001
 </h4>
 
-instalacao em uma linha
-git clone https://github.com/null070/brute.py && cd brute.py
-<a href="https://www.instagram.com/kamy_z7/">insta do dev~</a>
+instalacao em uma linha: <br> <p> </p>
+git clone https://github.com/null070/brute.py && cd brute.py && chmod +x brute.py && python3 brute.py  <br>
+<p><a href="https://www.instagram.com/kamy_z7/">insta do dev~</a></p>
