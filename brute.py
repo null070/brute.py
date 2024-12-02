@@ -2,7 +2,7 @@ import threading
 from random import choice
 import os
 
-
+os.system("clear")
 b = input('Digite sua senha: ')
 
 
