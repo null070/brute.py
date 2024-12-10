@@ -2,8 +2,9 @@
 <h1>em desenvolvimento!</h1>
 <h2>uma ferramenta de bruteforce em .py(python)</h2>
 <h4>
-    versao: <br>
-    beta:09
+    versao: <br> <br>
+    v1.0
+    
 </h4>
 
 instalacao em uma linha: <br> <p> </p>
